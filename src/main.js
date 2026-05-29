@@ -1,58 +1,72 @@
 import './styles.css'
 
-const activities = [
-  ['Viaje a Manizales', 'Una ruta fría para empezar bonito.', '⌖'],
-  ['Glamping en clima frío', 'Mantas, bosque y cielo de montaña.', '△'],
-  ['Restaurante decorado', 'Una mesa suave, íntima y pensada.', '◌'],
-  ['Viaje al Nevado del Ruiz', 'Nieve, silencio y paisaje inmenso.', '❄'],
-  ['Aguas termales', 'Calorcito en medio del invierno.', '≈'],
-  ['Amanecer frío juntos', 'Ver la luz llegar abrazaditos.', '☾'],
-  ['Arrunchis viendo el paisaje', 'Quedarnos ahí, sin afán.', '♡'],
+const timelineItems = [
+  ['⌖', 'Viaje a Manizales', 'Una ruta fría para empezar bonito.'],
+  ['△', 'Glamping Leon Dormido', 'Mantas, bosque y cielo de montaña.'],
+  ['◌', 'Restaurante', 'Una mesa suave, íntima y pensada.'],
+  ['❄', 'Viaje al Nevado del Ruiz', 'Nieve, silencio y paisaje inmenso.'],
+  ['≈', 'Aguas termales', 'Calorcito en medio del invierno.'],
+  ['☾', 'Amanecer frío juntos', 'Ver la luz llegar juntos.'],
+  ['♡', 'Arrunchis viendo el paisaje', 'Quedarnos ahí, sin afán.'],
 ]
 
-const busDetails = [
-  '$19.000 según Redbus a Manizales, ida y vuelta.',
-  '$38.000 x 2 = $76.000',
-  '$90.000 según Uber del terminal de Manizales al glamping',
-  '$250.000 habitación sencilla',
-  '$60.000 decoración del restaurante',
-  '$50.000 transporte hasta el nevado',
-  '$395.000 tour nevado, aguas termales y regreso a Manizales',
-  '$395.000 x 2 = $790.000',
-]
-
-const carDetails = [
-  'Ruta en carro pensada para ir tranquilos, parando bonito y sin correr.',
-  '$250.000 habitación sencilla',
-  '$60.000 decoración del restaurante',
-  '$50.000 transporte hasta el nevado',
-  '$395.000 tour nevado, aguas termales y regreso a Manizales',
-  '$395.000 x 2 = $790.000',
+const busCosts = [
+  ['Bus ida y vuelta', '$38.000 x 2 = $76.000'],
+  ['Terminal de Manizales al glamping', '$90.000'],
+  ['Habitación sencilla', '$250.000'],
+  ['Restaurante', '$60.000'],
+  ['Transporte hasta el nevado', '$50.000'],
+  ['Tour nevado, aguas termales y regreso a Manizales', '$395.000 x 2'],
 ]
 
 const root = document.querySelector('#root')
 
-function catSvg() {
+function snowmanSvg() {
   return `
-    <svg viewBox="0 0 420 360" class="cat-art" role="img" aria-label="Un gato abrigado sentado sobre nieve">
+    <svg viewBox="0 0 430 390" class="snowman-art" role="img" aria-label="Muñeco de nieve suave con carita de gato">
       <defs>
-        <radialGradient id="fur" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="#f7fbff"/><stop offset="62%" stop-color="#d6e4f4"/><stop offset="100%" stop-color="#9eb7d1"/></radialGradient>
-        <linearGradient id="scarf" x1="0" x2="1"><stop stop-color="#6bbcff"/><stop offset="1" stop-color="#9a86ff"/></linearGradient>
+        <radialGradient id="snowBody" cx="42%" cy="24%" r="78%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="58%" stop-color="#dcecff"/>
+          <stop offset="100%" stop-color="#9ab6d5"/>
+        </radialGradient>
+        <linearGradient id="scarfBlue" x1="0" x2="1">
+          <stop stop-color="#72c8ff"/>
+          <stop offset="52%" stop-color="#9fdfff"/>
+          <stop offset="100%" stop-color="#9689ff"/>
+        </linearGradient>
+        <linearGradient id="hatBlue" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#12284c"/>
+          <stop offset="100%" stop-color="#27316c"/>
+        </linearGradient>
+        <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
       </defs>
-      <ellipse cx="210" cy="316" rx="126" ry="26" fill="#dff4ff" opacity=".28"/>
-      <path class="tail" d="M302 238c43 6 62 33 42 56-21 24-73 8-83-24" fill="none" stroke="#b5c8dc" stroke-width="26" stroke-linecap="round"/>
-      <path d="M132 151c-10 36-14 98 16 133 29 34 101 38 132 2 31-36 26-99 13-135-17-47-143-48-161 0Z" fill="url(#fur)"/>
-      <path d="M134 133 96 73l66 26M286 133l38-60-66 26" fill="#d9e6f5" stroke="#a9bdd2" stroke-width="7" stroke-linejoin="round"/>
-      <path d="M112 83 142 111 127 99M308 83l-30 28 15-12" fill="#b7d1e8" opacity=".8"/>
-      <ellipse cx="210" cy="150" rx="93" ry="78" fill="url(#fur)"/>
-      <g class="blink"><path d="M165 145c10-10 25-10 35 0" fill="none" stroke="#233652" stroke-width="7" stroke-linecap="round"/><path d="M220 145c10-10 25-10 35 0" fill="none" stroke="#233652" stroke-width="7" stroke-linecap="round"/></g>
-      <path d="M210 158c-8 5-15 5-21 0 8 18 34 18 42 0-6 5-13 5-21 0Z" fill="#516b86" opacity=".8"/>
-      <path d="M204 170c-12 12-28 10-38 1M216 170c12 12 28 10 38 1" fill="none" stroke="#637b94" stroke-width="4" stroke-linecap="round" opacity=".75"/>
-      <path d="M137 189c40 19 104 22 146 0l11 34c-51 28-117 28-169 0Z" fill="url(#scarf)"/>
-      <path d="M248 210c18 14 22 41 14 67l-38-20c11-18 16-33 11-45Z" fill="#736ee8"/>
-      <path d="M134 238c-18 21-15 55 5 68M286 238c18 21 15 55-5 68" fill="none" stroke="#edf7ff" stroke-width="22" stroke-linecap="round" opacity=".9"/>
-      <circle cx="166" cy="162" r="8" fill="#efb7c8" opacity=".5"/><circle cx="254" cy="162" r="8" fill="#efb7c8" opacity=".5"/>
-      <g fill="#fff" opacity=".85"><circle cx="104" cy="260" r="5"/><circle cx="330" cy="230" r="4"/><circle cx="286" cy="86" r="3"/><circle cx="146" cy="61" r="3"/></g>
+      <ellipse cx="214" cy="345" rx="138" ry="28" fill="#dff4ff" opacity=".25"/>
+      <path d="M91 246c-34 10-58 27-72 52" fill="none" stroke="#a9c9e7" stroke-width="9" stroke-linecap="round" opacity=".55"/>
+      <path d="M337 246c34 10 58 27 72 52" fill="none" stroke="#a9c9e7" stroke-width="9" stroke-linecap="round" opacity=".55"/>
+      <circle cx="214" cy="244" r="102" fill="url(#snowBody)"/>
+      <circle cx="214" cy="138" r="78" fill="url(#snowBody)"/>
+      <path d="M144 101c18-46 121-48 141-1" fill="none" stroke="rgba(255,255,255,.56)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M158 78c9-38 105-38 114 0l8 44c-38 13-86 13-130 0Z" fill="url(#hatBlue)"/>
+      <path d="M136 121c43 17 111 17 156 0" fill="none" stroke="#77caff" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="171" cy="128" r="7" fill="#203654"/>
+      <circle cx="257" cy="128" r="7" fill="#203654"/>
+      <path class="snowman-blink" d="M159 127c11-10 23-10 35 0M235 127c11-10 23-10 35 0" fill="none" stroke="#203654" stroke-width="6" stroke-linecap="round"/>
+      <path d="M214 143c-8 5-16 5-24 0 9 15 39 15 48 0-8 5-16 5-24 0Z" fill="#607894" opacity=".86"/>
+      <path d="M204 154c-15 12-31 9-40-1M224 154c15 12 31 9 40-1" fill="none" stroke="#678099" stroke-width="4" stroke-linecap="round" opacity=".72"/>
+      <path d="M137 184c44 21 110 23 156 0l8 32c-55 24-122 24-175 0Z" fill="url(#scarfBlue)" filter="url(#softGlow)"/>
+      <path d="M252 207c18 18 20 47 9 77l-38-18c12-24 15-44 8-58Z" fill="#8278ea"/>
+      <circle cx="190" cy="239" r="5" fill="#8eb0cd" opacity=".85"/>
+      <circle cx="222" cy="278" r="5" fill="#8eb0cd" opacity=".7"/>
+      <circle cx="242" cy="228" r="4" fill="#8eb0cd" opacity=".62"/>
+      <circle cx="173" cy="148" r="7" fill="#f1b9c9" opacity=".42"/>
+      <circle cx="255" cy="148" r="7" fill="#f1b9c9" opacity=".42"/>
+      <g class="floating-crystals" fill="#fff" opacity=".82">
+        <circle cx="97" cy="212" r="4"/><circle cx="333" cy="186" r="3"/><circle cx="302" cy="72" r="3"/><circle cx="128" cy="64" r="3"/>
+      </g>
     </svg>`
 }
 
@@ -60,18 +74,22 @@ function createSnow() {
   const layer = document.createElement('div')
   layer.className = 'snow-layer'
   layer.setAttribute('aria-hidden', 'true')
-  Array.from({ length: 86 }).forEach((_, i) => {
+  Array.from({ length: 72 }).forEach((_, i) => {
     const flake = document.createElement('span')
     flake.className = 'snowflake'
-    flake.style.cssText = `--left:${Math.random() * 100}%;--size:${Math.random() * 3.5 + 1.5}px;--delay:${Math.random() * -24}s;--duration:${Math.random() * 18 + 16}s;--drift:${Math.random() * 90 - 45}px;--opacity:${Math.random() * .45 + .2}`
+    flake.style.cssText = `--left:${Math.random() * 100}%;--size:${Math.random() * 3.2 + 1.3}px;--delay:${Math.random() * -24}s;--duration:${Math.random() * 18 + 18}s;--drift:${Math.random() * 76 - 38}px;--opacity:${Math.random() * .38 + .18}`
     flake.dataset.id = i
     layer.append(flake)
   })
   return layer
 }
 
-function costLines(items) {
-  return items.map((item, index) => `<li class="cost-line reveal" style="--delay:${index * 55}ms"><span class="strike-text">${item}</span><span class="covered">✓ cubierto 💙</span></li>`).join('')
+function costRows(items) {
+  return items.map(([label, price], index) => `
+    <li class="cost-row reveal" style="--delay:${index * 65}ms">
+      <div class="cost-copy"><span class="cost-label">${label}</span><span class="cost-price">${price}</span></div>
+      <span class="covered">✓ cubierto 💙</span>
+    </li>`).join('')
 }
 
 function renderLanding() {
@@ -79,9 +97,8 @@ function renderLanding() {
     <div class="animated-sky"></div><div class="blur-field blur-one"></div><div class="blur-field blur-two"></div>
     <button class="music-button" aria-label="Activar o pausar ambiente sonoro">♩</button>
     <section class="landing section-shell screen-in">
-      <div class="cat-orbit">${catSvg()}</div>
+      <div class="mascot-orbit">${snowmanSvg()}</div>
       <button class="enter-button">Abre aquí si quieres vivir esta aventura conmigo 💙</button>
-      <span class="landing-hint">Una noche fría, una idea bonita.</span>
     </section>`
   root.append(createSnow())
   root.querySelector('.enter-button').addEventListener('click', renderMain)
@@ -97,19 +114,31 @@ function renderMain() {
       <main class="screen-in">
         <section class="plan section-shell" id="plan">
           <div class="moon-blur" aria-hidden="true"></div>
-          <div class="section-kicker reveal">nuestro invierno</div>
+          <div class="section-kicker reveal">Nuestro invierno</div>
           <h1 class="section-title reveal">Nuestro plan ✨</h1>
-          <div class="activity-grid">
-            ${activities.map(([title, note, icon], index) => `
-              <article class="glass-card activity-card reveal" style="--delay:${index * 70}ms">
-                <div class="icon-veil">${icon}</div><h2>${title}</h2><p>${note}</p>
-              </article>`).join('')}
+          <div class="timeline-shell glass-panel reveal">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-grid">
+              ${timelineItems.map(([icon, title, note], index) => `
+                <article class="timeline-item reveal" style="--delay:${index * 80}ms">
+                  <div class="timeline-node"><span>${icon}</span></div>
+                  <h2>${title}</h2>
+                  <p>“${note}”</p>
+                </article>`).join('')}
+            </div>
           </div>
         </section>
         <section class="roulette-section section-shell">
           <div class="aurora-divider"></div><div class="section-kicker reveal">una pequeña sorpresa</div>
           <div class="roulette-stage">
-            <div class="roulette-wheel"><span class="wheel-ring"></span><span class="wheel-glow"></span><span class="wheel-spark">✦</span></div>
+            <div class="wheel-wrap">
+              <div class="roulette-pointer" aria-hidden="true"></div>
+              <div class="roulette-wheel">
+                <span class="metal-edge"></span><span class="wheel-ring"></span><span class="wheel-glow"></span>
+                <span class="wheel-slice slice-one"></span><span class="wheel-slice slice-two"></span><span class="wheel-slice slice-three"></span>
+                <span class="wheel-center"><span>💙</span></span>
+              </div>
+            </div>
             <button class="spin-button">Gira la ruleta 💫</button>
           </div>
           <article class="letter-card" hidden>
@@ -122,12 +151,10 @@ function renderMain() {
         <section class="economics section-shell" id="detalles">
           <button class="details-opener">Abre aquí si quieres ver los detalles económicos <span>⌄</span></button>
           <div class="economics-grid" hidden>
-            <article class="glass-card finance-card"><div class="finance-header"><span>🚌</span><h2>Opción en bus</h2></div><ul>${costLines(busDetails)}</ul></article>
-            <article class="glass-card finance-card"><div class="finance-header"><span>🚙</span><h2>Opción en carro</h2></div><ul>${costLines(carDetails)}</ul></article>
-            <div class="covered-note">No te preocupes por eso. Yo quiero crear esta experiencia contigo.</div>
+            <article class="glass-panel finance-card"><div class="finance-header"><h2>🚌 Opción en bus</h2></div><ul>${costRows(busCosts)}</ul></article>
+            <div class="final-question reveal">¿Quieres vivir esta experiencia conmigo? 💙</div>
           </div>
         </section>
-        <footer>hecho con frío, calma y mucho amor</footer>
       </main>`
     root.append(createSnow())
     root.querySelector('.music-button').addEventListener('click', toggleMusic)
@@ -138,6 +165,7 @@ function renderMain() {
 
 function setupInteractions() {
   const wheel = root.querySelector('.roulette-wheel')
+  const stage = root.querySelector('.roulette-stage')
   const spinButton = root.querySelector('.spin-button')
   const letter = root.querySelector('.letter-card')
   let spun = false
@@ -146,14 +174,16 @@ function setupInteractions() {
     if (spun) return
     spun = true
     spinButton.textContent = 'girando despacito…'
+    stage.classList.add('spinning')
     wheel.classList.add('is-spinning')
-    wheel.style.transform = `rotate(${1980 + Math.floor(Math.random() * 120)}deg)`
+    wheel.style.transform = `rotate(${2520 + Math.floor(Math.random() * 180)}deg)`
     setTimeout(() => {
+      stage.classList.remove('spinning')
       wheel.classList.remove('is-spinning')
       spinButton.textContent = 'la sorpresa apareció ✨'
       letter.hidden = false
       requestAnimationFrame(() => letter.classList.add('letter-visible'))
-    }, 3900)
+    }, 4600)
   })
 
   const opener = root.querySelector('.details-opener')
@@ -175,7 +205,7 @@ function setupRevealObserver() {
         observer.unobserve(entry.target)
       }
     })
-  }, { threshold: 0.18 })
+  }, { threshold: 0.16 })
   document.querySelectorAll('.reveal').forEach((item) => observer.observe(item))
 }
 
